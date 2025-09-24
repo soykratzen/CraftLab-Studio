@@ -231,3 +231,20 @@ button:hover::after, .btn:hover::after, a:hover::after {
   from { left: -100%; }
   to { left: 100%; }
 }
+
+.boton-dorado {
+  background: linear-gradient(45deg, #FFD700, #FFA500); /* dorado degradado */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.boton-dorado:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #FFD700;
+}
