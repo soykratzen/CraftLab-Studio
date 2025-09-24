@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CraftLab Studio</title>
+  <link rel="stylesheet" href="style.css">
+</head> 
+
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById("configMenu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  }
+
+  function changeLang(lang) {
+    if (lang === "es") {
+      alert("Idioma cambiado a Español");
+    } else {
+      alert("Language changed to English");
+    }
+  }
+
+  function changeTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.remove("yellow-theme");
+    } else if (theme === "yellow") {
+      document.body.classList.add("yellow-theme");
+    }
+  }
+  </script>
+
+  <script>
+  function setThemeColor(color) {
+    document.documentElement.style.setProperty('--bg-color', color);
+
+    // Detectar si el color es claro u oscuro
+    const rgb = parseInt(color.substring(1), 16); 
+    const r = (rgb >> 16) & 0xff;
+    const g = (rgb >> 8) & 0xff;
+    const b = (rgb >> 0) & 0xff;
+    const brightness = (r*299 + g*587 + b*114) / 1000;
+
+    if (brightness > 128) {
+      document.documentElement.style.setProperty('--text-color', '#000000');
+    } else {
+      document.documentElement.style.setProperty('--text-color', '#ffffff');
+    }
+  }
+  </script>
+
+<body>
+
+  <script>
+    const colorPicker = document.getElementById("colorPicker");
+
+    // Cuando elijas un color, se aplica al tema
+    colorPicker.addEventListener("input", (e) => {
+      document.body.style.backgroundColor = e.target.value;
+    });
+  </script>
+
+  </body>
+  </html>
+
+  <!-- Parte de arriba -->
+  <header>
+    <div class="logo-top">
+      <img src="https://i.ibb.co/9XPxkrD/177e2e4b-9a84-44aa-9cfc-38131ff237f9-removebg-preview-1-convertido-a-1000x1000-removebg-preview.png" alt="Logo" class="logo-small">
+    </div>
+
+    <!-- Menú de configuración oculto -->
+    <div id="configMenu" class="config-menu">
+      <h3>⚙️ Configuración</h3>
+
+      <!-- Selector de idioma -->
+      <label for="lang">Idioma:</label>
+      <select id="lang" onchange="changeLang(this.value)">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+
+      <br><br>
+
+      <!-- Selector de tema -->
+      <label for="theme">Tema:</label>
+      <select id="theme" onchange="changeTheme(this.value)">
+        <option value="dark">Negro</option>
+        <option value="yellow">Celeste</option>
+      </select>
+    </div>
+
+    <div class="main-title">
+      <img src="https://i.ibb.co/9XPxkrD/177e2e4b-9a84-44aa-9cfc-38131ff237f9-removebg-preview-1-convertido-a-1000x1000-removebg-preview.png" alt="Logo" class="logo-big">
+      <h1>CRAFTLAb STUDIO</h1>
+      <div class="line"></div>
+      <p>Creadores de eventos para Minecraft</p>
+
+      <div class="buttons">
+        <!-- Esto abre la nueva página anuncios.html -->
+        <a href="anuncios.html" class="btn yellow">📢 Anuncios CraftLab</a>
+        <a href="https://discord.gg/J67VMHzsd4" target="_blank" class="btn dark">💬 Discord</a>
+      </div>
+    </div>
+
+      <!-- Parte de abajo -->
+      <footer>
+        <h3>Síguenos</h3>
+        <div class="socials">
+          <a href="https://www.youtube.com/@CraftLab_Studio" target="_blank" class="circle">🎵Youtube</a>
+          <a href="https://discord.gg/J67VMHzsd4" target="_blank" class="circle">🎮discord</a>
+          <a href="https://x.com/tuusuario" target="_blank" class="circle">✖tWiter</a>
+        </div>
+        <p class="copy">© 2025 CraftLab Studio. Todos los derechos reservados.</p>
+        <p class="dev">Desarrollado con ❤️ para la comunidad digital</p>
+      </footer>
+    </body>
+    </html>
+
+    <script>
+    function toggleMenu() {
+      const menu = document.getElementById("configMenu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function changeLang(lang) {
+      if (lang === "es") {
+        alert("Idioma cambiado a Español");
+      } else {
+        alert("Language changed to English");
+      }
+    }
+
+    function changeTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.remove("yellow-theme");
+      } else if (theme === "yellow") {
+        document.body.classList.add("yellow-theme");
+      }
+    }
+    </script>
+
+  </header>
+
+  <!-- Botón de configuración (emoji de tuerca) -->
+  <div class="settings-btn" onclick="toggleMenu()">⚙️</div>
+
+  <!-- Menú de configuración oculto -->
+  <div id="configMenu" class="config-menu">
+    <h3>⚙️ Configuración</h3>
+
+    <!-- Selector de idioma -->
+    <label for="lang">Idioma:</label>
+    <select id="lang" onchange="changeLang(this.value)">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+    </select>
+
+    <br><br>
+
+    <!-- Selector de color para el tema -->
+    <label for="themeColor">Color del tema:</label>
+    <input type="color" id="themeColor" value="#000000" onchange="setThemeColor(this.value)">
+
+    <!-- Audio angelical -->
+    <audio id="sonidoMenu" src="angelical.mp3"></audio>
+
+    <script>
+      // Selecciona todos los botones o enlaces de tu menú
+      const botonesMenu = document.querySelectorAll('.menu-boton'); // Cambia .menu-boton según tu clase
+
+      botonesMenu.forEach(boton => {
+        boton.addEventListener('mouseenter', () => {
+          const sonido = document.getElementById('sonidoMenu');
+          sonido.currentTime = 0; // Reinicia el sonido
+          sonido.play();
+        });
+      });
+    </script>
