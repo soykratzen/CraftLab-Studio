@@ -7,6 +7,68 @@
   <link rel="stylesheet" href="style.css">
 </head> 
 
+  <style>
+
+  /* pequeño efecto glow inicial */
+  .logo-big {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  }
+
+
+  /* animación sutil continua opcional (descomenta si quieres) */
+  /*
+  @keyframes floatSubtle {
+    0% { transform: translateY(0) }
+    50% { transform: translateY(-6px) }
+    100% { transform: translateY(0) }
+  }
+  .logo-big.auto-float {
+    animation: floatSubtle 4s ease-in-out infinite;
+  }
+  */
+
+  /* --- TUERCA (settings) --- */
+  .settings-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 26px;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.25s ease;
+    z-index: 110;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+  }
+
+  /* hover ligero en la tuerca */
+  .settings-btn:hover {
+    transform: scale(1.08);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* clase que aplicamos al clicar para girar */
+  .spin {
+    animation: spinAnim 0.55s cubic-bezier(.2,.8,.2,1);
+  }
+
+  /* keyframes para girar */
+  @keyframes spinAnim {
+    0%   { transform: rotate(0deg); }
+    50%  { transform: rotate(200deg) scale(1.05); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* si quieres sombra al abrir el menu (opcional) */
+  .config-menu.open {
+    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  }
+  </style>
+
   <script>
   function toggleMenu() {
     const menu = document.getElementById("configMenu");
@@ -60,64 +122,95 @@
     });
   </script>
 
-  <canvas id="stars"></canvas>
-<script>
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+  <script>
+  /* Selecciones */
+  const settingsBtn = document.getElementById('settingsBtn');
+  const configMenu = document.getElementById('configMenu'); // tu menú existente
+  // Si no tienes id configMenu, crea el div con id="configMenu" en tu HTML
 
-let stars = [];
-for (let i = 0; i < 120; i++) {
-  stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2,
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5
+  // girar la rueda al click y abrir/cerrar el menú
+  settingsBtn.addEventListener('click', () => {
+    // añadir clase spin para animar la tuerca
+    settingsBtn.classList.add('spin');
+
+    // quitar la clase al terminar la animación (para poder volver a girar en próximos clicks)
+    settingsBtn.addEventListener('animationend', function handler() {
+      settingsBtn.classList.remove('spin');
+      settingsBtn.removeEventListener('animationend', handler);
+    });
+
+    // toggle del menú (si lo tienes)
+    if (configMenu) {
+      configMenu.classList.toggle('open');     // opcional: añade estilos .config-menu.open en CSS
+      // si usas display block/none:
+      if (configMenu.classList.contains('open')) {
+        configMenu.style.display = 'block';
+      } else {
+        configMenu.style.display = 'none';
+      }
+    }
   });
-}
+
+  /* -- Mejora de acceso: al presionar Enter/Space en la tuerca también funciona -- */
+  settingsBtn.setAttribute('tabindex', '0');
+  settingsBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      settingsBtn.click();
+    }
+  });
+  </script>
+
+  <script>
+    const miniLogo = document.getElementById('miniLogo');
+    const studioText = document.getElementById('studioText');
+
+    miniLogo.addEventListener('click', () => {
+      studioText.classList.toggle('show'); 
+    });
+  </script>
 
   <canvas id="stars"></canvas>
-<script>
-const canvas = document.getElementById("stars");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let stars = [];
-for (let i = 0; i < 120; i++) {
-  stars.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2,
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5
-  });
-}
-
-function drawStars() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "white";
-  for (let star of stars) {
-    ctx.beginPath();
-    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-    ctx.fill();
-    star.x += star.dx;
-    star.y += star.dy;
-    if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
-    if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
-  }
-  requestAnimationFrame(drawStars);
-}
-drawStars();
-
-window.addEventListener("resize", () => {
+  <script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-});
-</script>
 
+  let stars = [];
+  for (let i = 0; i < 120; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fill();
+      star.x += star.dx;
+      star.y += star.dy;
+      if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+      if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+    }
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+  </script>
+
+  
   </body>
   </html>
 
@@ -161,9 +254,10 @@ window.addEventListener("resize", () => {
       </div>
     </div>
 
-        <button class="boton-dorado"   onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLScsAtt32UdoEP4jl79nJXtfjEVEMYHMZ-k3GcbmnL3MBACSAw/viewform?usp=header'">
+    <button class="boton-dorado"   onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLScsAtt32UdoEP4jl79nJXtfjEVEMYHMZ-k3GcbmnL3MBACSAw/viewform?usp=header'">
       ¿Quieres postularte?
     </button>
+
 
       <!-- Parte de abajo -->
       <footer>

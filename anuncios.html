@@ -6,6 +6,80 @@
   <title>Anuncios - CraftLab Studio</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
+  <!DOCTYPE html>
+  <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Zona de Anuncios</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #222;
+        color: white;
+        text-align: center;
+      }
+
+      #anuncios {
+        margin-top: 50px;
+      }
+
+      #btnDesafio {
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #4CAF50;
+        color: white;
+        transition: 0.3s;
+      }
+
+      #btnDesafio:hover {
+        background: #45a049;
+        box-shadow: 0 0 10px #fff;
+      }
+
+      /* Estilos del menú */
+      .menu {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        width: 300px;
+        display: none; /* oculto por defecto */
+        z-index: 1000;
+      }
+
+      .menu.visible {
+        display: block;
+      }
+
+      .menu h3 {
+        margin-top: 0;
+      }
+
+      #cerrarDesafio {
+        margin-top: 15px;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 6px;
+        background: crimson;
+        color: white;
+        cursor: pointer;
+      }
+
+      #cerrarDesafio:hover {
+        background: darkred;
+      }
+    </style>
+  </head>
+  <body>
 <body>
   <header>
     <h1>📢 Anuncios de CraftLab Studio</h1>
@@ -20,10 +94,26 @@
       <!-- Ejemplo de anuncio -->
       <div class="anuncio">
         <h3>🔔 LABSAFIO 3</h3>
-        <p>Mob en progreso.</p>
+        <p>Aun no hay actualisaciones.</p>
         <span class="fecha">Att:Kratzen</span>
       </div>
     </section>
   </main>
 </body>
 </html>
+
+<section id="anuncios">
+  <h2>Zona de Anuncios</h2>
+  <button id="btnDesafio">Desafío</button>
+</section>
+
+<!-- Modal de Desafío -->
+<div id="desafioMenu" class="menu oculto">
+  <h3>Actualizaciones diarias</h3>
+  <ul>
+    <li>✔ Evento especial hoy</li>
+    <li>✔ Nueva misión añadida</li>
+    <li>✔ Recompensas mejoradas</li>
+  </ul>
+  <button id="cerrarDesafio">Cerrar</button>
+</div>
