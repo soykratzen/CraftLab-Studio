@@ -86,6 +86,9 @@
     <a href="index.html" class="btn dark">⬅ Volver al inicio</a>
   </header>
 
+  <!-- Botón de configuración (emoji de tuerca) -->
+  <div class="settings-btn" onclick="toggleMenu()">⚙️</div>
+
   <main>
     <section class="anuncios">
       <h2>Últimos anuncios</h2>
@@ -99,6 +102,47 @@
       </div>
     </section>
   </main>
+
+  <canvas id="stars"></canvas>
+  <script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let stars = [];
+  for (let i = 0; i < 120; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+      ctx.fill();
+      star.x += star.dx;
+      star.y += star.dy;
+      if (star.x < 0 || star.x > canvas.width) star.dx *= -1;
+      if (star.y < 0 || star.y > canvas.height) star.dy *= -1;
+    }
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+  </script>
+
 </body>
 </html>
 
@@ -117,3 +161,17 @@
   </ul>
   <button id="cerrarDesafio">Cerrar</button>
 </div>
+
+<script>
+  const btnDesafio = document.getElementById("btnDesafio");
+  const menuDesafio = document.getElementById("menuDesafio");
+  const cerrarMenu = document.getElementById("cerrarMenu");
+
+  btnDesafio.addEventListener("click", () => {
+    menuDesafio.style.display = "block";
+  });
+
+  cerrarMenu.addEventListener("click", () => {
+    menuDesafio.style.display = "none";
+  });
+</script>

@@ -331,3 +331,41 @@ canvas#stars {
   height: 100%;
   z-index: -1;   /* para que el contenido quede encima */
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000; /* negro puro */
+  overflow-x: hidden;
+}
+
+/* Estilo base para botones */
+.btn {
+  background: #ffcc00;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* Menú oculto */
+.menu-oculto {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+  z-index: 1000;
+}

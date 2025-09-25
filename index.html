@@ -210,7 +210,21 @@
   });
   </script>
 
-  
+  <audio id="hoverSound" src="angel.mp3" preload="auto"></audio>
+
+  <script>
+    // Obtener todos los botones
+    const botones = document.querySelectorAll(".btn");
+    const sonido = document.getElementById("hoverSound");
+
+    botones.forEach(boton => {
+      boton.addEventListener("mouseenter", () => {
+        sonido.currentTime = 0; // Reinicia el sonido
+        sonido.play();
+      });
+    });
+  </script>
+
   </body>
   </html>
 
@@ -319,7 +333,7 @@
     <input type="color" id="themeColor" value="#000000" onchange="setThemeColor(this.value)">
 
     <!-- Audio angelical -->
-    <audio id="sonidoMenu" src="angelical.mp3"></audio>
+    <audio id="sonidoMenu" src="angel.mp3"></audio>
 
     <script>
       // Selecciona todos los botones o enlaces de tu menú
