@@ -248,3 +248,17 @@ button:hover::after, .btn:hover::after, a:hover::after {
   transform: scale(1.05);
   box-shadow: 0 0 15px #FFD700;
 }
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
